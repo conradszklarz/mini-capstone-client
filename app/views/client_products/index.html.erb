@@ -1,0 +1,7 @@
+<% @products.each do |product| %>
+<h2><a href="/client/products/<%= product["id"] %>"/<%= product["title"] %></h2>
+<h3>:Name <%= product["name"] %><h3>
+<h4>:Price <%= product["price"] %><h4>
+<h5>:Description <%= product["description"] %><h5>
+<br>
+<% end %>i
