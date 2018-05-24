@@ -2,9 +2,10 @@
 <h3>Price: <%= @product["price"] %><h3>
 <h4>Tax: <%= @product["tax"] %><h4>
 <h4>Total: <%= @product["total"] %><h4>
-  <h4>Description: <%= @product["description"] %><h4>
+<h4>Description: <%= @product["description"] %><h4>
+<h6>Supplier: <%= @product["supplier"]["name"] %></h6>
+<img src="<%= @product["image_url"] %>">
 
-  <img src="<%= @product["image_url"] %>">
+<a href="/client/products/<%= @product['id']%>/edit">Edit</a>
+<a href="/client/products/<%= @product['id]'%>" data-method="delete">Delete</a>
 
-  <a href="/client/products/<%= @product['id']%>/edit">Edit</a>
-  <a href="/client/products/<%= @product['id]'%>" data-method="delete">Delete</a>
