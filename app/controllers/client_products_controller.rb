@@ -19,7 +19,7 @@ class ClientProductsController < ApplicationController
     client params = {   title: params[:title],
                         name: params[:name],
                         price: params[:price],
-                        image_url: params[:image_url],
+                        
                         description: params[:description],
                         supplier_id: params[:supplier_id]
                     }
@@ -49,7 +49,7 @@ class ClientProductsController < ApplicationController
                     title: params[:title],
                     name: params[:name],
                     price: params[:price],
-                    image_url: params[:image_url],
+                    
                     description: params[:description],
                     [supplier_id: params[:supplier_id]
                     } 
