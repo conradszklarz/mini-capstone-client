@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+
+  before_action :set_headers
+
   def set_headers
     if session[:jwt]
       @jwt = session[:jwt]
@@ -8,5 +11,4 @@ class ApplicationController < ActionController::Base
       Unirest.clear_default_headers()
     end
   end
-
 end
