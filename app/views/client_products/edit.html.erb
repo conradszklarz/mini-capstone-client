@@ -1,16 +1,15 @@
-<% form_tag "client/products", method: :post do %>
+<%= form_tag "/client/products/#{@product["id"]}", method: :patch do %>
   <div>
-    Name: <input type="text" name="name" value="<% @product['name'] %> ">
+    Name: <input type="text" name="name" value="<%= @product["name"] %>" />
   </div>
-<div>
-  Price: <input type="text" name="price" value="<% @product['price'] %> ">
-</div>
-<div>
-  Supplier ID: <input type="text" name="supplier_id" value="<% @product["supplier_id"] %> ">
-</div>
   <div>
-    Description: <input type="text" name="description" value="<% @product['description'] %> ">
+    Price: <input type="text" name="price" value="<%= @product["price"] %>" />
   </div>
-  <input type="submit" value="Create Product">
-<!-- </form> -->
+  <div>
+    Description: <input type="text" name="description" value="<%= @product["description"] %>" />
+  </div>
+  <div>
+    Supplier ID: <input type="text" name="supplier_id" value="<%= @product["supplier"]["id"] %>">
+  </div>
+  <input type="submit" name="" value="Update Product"/>
 <% end %>
