@@ -1,9 +1,10 @@
-class ClientProductsController < ApplicationController
-  def index
+class Client::ProductsController < ApplicationController
+   def index
     client_params = {
                      search: params[:search],
                      sort_by: params[:sort_by],
-                     sort_order: params[:sort_order]
+                     sort_order: params[:sort_order],
+                     category: params[:category]
                     }
     response = Unirest.get(
                            "http://localhost:3000/api/products",
