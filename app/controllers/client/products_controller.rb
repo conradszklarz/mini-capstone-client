@@ -1,5 +1,5 @@
 class Client::ProductsController < ApplicationController
-   def index
+def index
     client_params = {
                      search: params[:search],
                      sort_by: params[:sort_by],
@@ -20,20 +20,24 @@ class Client::ProductsController < ApplicationController
   end
 
   def create
-  @product = {
-                     'name' => params[:name],
-                     'price' => params[:price],
-                     'description' => params[:description],
-                     'supplier_id' => params[:supplier_id]
-                    }
+    @product = {
+                   'name' => params[:name],
+                   'price' => params[:price],
+                   'description' => params[:description],
+                   'supplier_id' => params[:supplier_id]
+                  }
 
     response = Unirest.post(
                             "http://localhost:3000/api/products",
-                            parameters: client_params
+                            parameters: @product
                             )
+
     if response.code == 200
       flash[:success] = "Successfully created Product"
       redirect_to "/client/products/"
+    elsif response.code == 401
+      flash[:warning] = "You are not Authorized to make a product"
+      redirect_to "/"
     else
       @errors = response.body["errors"]
       render 'new.html.erb'
@@ -55,26 +59,27 @@ class Client::ProductsController < ApplicationController
 
   def update
     @product = {
-                      'id' => params[:id],
-                     'name' => params[:name],
-                     'price' => params[:price],
-                     'description' => params[:description],
-                     'supplier_id' => params[:supplier_id],
-                     'supplier' => {'id' => params[:supplier_id]}
-                    }
+                   'id' => params[:id],
+                   'name' => params[:name],
+                   'price' => params[:price],
+                   'description' => params[:description],
+                   'supplier_id' => params[:supplier_id],
+                   'supplier' => {'id' => params[:supplier_id]}
+                  }
 
     response = Unirest.patch(
                             "http://localhost:3000/api/products/#{params[:id]}",
                             parameters: @product
                             )
+
     if response.code == 200
       flash[:success] = "Successfully updated Product"
       redirect_to "/client/products/#{params[:id]}"
     elsif response.code == 401
-      flash[:warning] = "You are not Authorized to make a product"
-      redirect_to "/"
+      flash[:warning] = "You are not Authorized"
+      redirect_to '/'
     else
-      @errors = response.body('errors')
+      @errors = response.body['errors']
       render 'edit.html.erb'
     end
   end
@@ -82,10 +87,11 @@ class Client::ProductsController < ApplicationController
   def destroy
     response = Unirest.delete("http://localhost:3000/api/products/#{params['id']}")
     if response.code == 200
-    flash[:success] = "Successfully destroyed product"
-    redirect_to "/client/products"
-  else
-    flash[:warning] = "You are not Authorized to make a product"
-      redirect_to "/"
+      flash[:success] = "Successfully destroyed product"
+      redirect_to "/client/products"
+    else
+      flash[:warning] = "You are not Authorized"
+      redirect_to '/'
+    end
   end
 end

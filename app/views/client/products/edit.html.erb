@@ -1,11 +1,10 @@
-<% if @errors  %>
-<ul>
-  <% @errors.each do |error| %>
-  <li><%= error %></li>
-  <% end %>
-</ul>
+<% if @errors %>
+  <ul>
+    <% @errors.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
 <% end %>
-
 
 <%= form_tag "/client/products/#{@product["id"]}", method: :patch do %>
   <div>
